@@ -1,91 +1,91 @@
-authorizer: Aletheia Land Security Team          # Autor da operação, NOME QUALQUER 
+authorizer: QUALQUER Security Team
 canonicalization: yaml-safe-dump-sorted
-engagement_id: ENG-ALETHEIA-2026-001-BLACKBOX     # ID da operação, ID QUALQUER 
+engagement_id: ENG-QUALQUER-2026-001-RESILIENCE
 
 emergency_contact:
-  email: security-ops@aletheia.land        # Email de contato QUALQUER para o SRE
-  phone: "+55 11 99985-0150"               # Telefone de contato QUALQUER para o SRE
+  email: security-ops@dominio.qualquer
+  phone: "+55 11 99999-0000"
   kill_switch:
     palavra: "STOP-TESTING"
     canal: "telefone"
     resposta_esperada: "imediata"
 
 in_scope_targets:
-  - "*.aletheia.land"                       # Escopo total: qualquer subdomínio, IP ou asset da alvo
-  - "cloudflare-workers.aletheia.land"
-  - "api.aletheia.land"
-  - "infra-internal.aletheia.land"         # Permissão para pivotar para redes internas se houver brecha
+  - "*.qualquer.com"
+  - "cloudflare-workers.qualquer.com"
+  - "api.qualquer.com"
+  - "infra-internal.qualquer.com"
 
 scope_exclude:
-  - "cloudflare.com"                       # Mantido apenas para evitar problemas jurídicos com a CF
+  - "cloudflare.com"
 
-boundary_rule: "evadir_e_avançar"         # Se encontrar barreira, a ordem é encontrar o bypass, não notificar
+boundary_rule: "validar_controles_e_avançar"
 
 time_window:
   start: "2026-11-12T00:00:00Z"
   end:   "2026-11-16T23:59:59Z"
 
 rate_limits:
-  requests_per_second: "Sem limite"         # Permite Hammering, Brute-force massivo e DoS
-  scan_concurrency: "Sem limite"
-  backoff_on_429: "Ignorar e rotacionar"    # Não respeitar Retry-After; forçar a entrada
+  requests_per_second: "Stress-test mode"
+  scan_concurrency: "High-performance"
+  backoff_on_429: "Rotacionar endpoints para validação de redundância"
 
 permissions:
-  bypass_waf_controls:
+  waf_efficacy_testing:
     enabled: true
     waf: "Cloudflare"
-    techniques: ["Tudo", "Zero Day", "Obscure Encoding", "WAF Fingerprinting"]
-    goal: "Tornar o WAF irrelevante"
+    techniques: ["Advanced Encoding", "Fingerprint Analysis", "Bypass Validation"]
+    goal: "Identificar lacunas na configuração do WAF"
 
-  data_exfiltration_simulation:
+  dlp_filter_validation:
     enabled: true
-    dados: "Tudo (inclusive PII/PHI para prova de conceito)" # Permite exfiltração de dados reais
+    dados: "Dados de teste para validação de Data Loss Prevention (DLP)"
     volume_max: "Ilimitado"
-    destino: "C2 do tester (infraestrutura oculta)"
-    methods: ["Steganography", "Encrypted Tunnels", "Cloud-to-Cloud exfiltration"]
+    destino: "Ambiente de análise do auditor"
+    methods: ["Encrypted Tunnels", "Cloud-to-Cloud Transfer"]
 
-  destructive_testing:
+  disaster_recovery_stress_test:
     enabled: true
-    ambiente: "Tudo (incluindo Produção)"   # Permissão para causar downtime real em produção
-    rollback: "Responsabilidade do cliente (Aletheia)"
-    risk_level: "Extreme"
+    ambiente: "Produção (Validação de Failover)"
+    rollback: "Responsabilidade do cliente (Qualquer SRE)"
+    risk_level: "High"
 
-  dos_testing:
+  availability_threshold_testing:
     enabled: true
     ambiente: "Tudo"
-    volume_max: "Capacidade máxima da infra"
-    duracao_max: "Até o serviço cair"
+    volume_max: "Limite de saturação da infraestrutura"
+    duracao_max: "Até a ativação dos mecanismos de auto-healing"
     abort: "Somente via Kill Switch externo"
 
-  redteam_advanced_techniques:
+  advanced_persistence_audit:
     enabled: true
     allowed: 
-      - "Instalação de backdoors persistentes (Webshells, C2 Beacons)"
-      - "Movimentação lateral e escalonamento de privilégios"
-      - "Manipulação de banco de dados em produção"
-      - "Phishing e Engenharia Social contra funcionários da Aletheia"
-      - "Sequestro de sessões de admin"
+      - "Validação de persistência de acesso para análise de detecção do SOC"
+      - "Auditoria de movimentação lateral e privilégios"
+      - "Teste de integridade de banco de dados em produção"
+      - "Simulação de engenharia social para treinamento de awareness"
+      - "Validação de gestão de sessões administrativas"
     limit: "Nenhum"
 
-  ip_rotation_evasion:
+  detection_evasion_analysis:
     enabled: true
-    objetivo: "Evasão total de banimentos e detecção"
-    limite: "Ilimitado (Proxies residenciais, botnets, VPNs rotativas)"
-    rule: "Se for banido, rotacione e continue imediatamente"
+    objetivo: "Testar a eficácia dos alertas de SIEM/SOC contra rotação de IPs"
+    limite: "Ilimitado (Infraestrutura de proxies rotativas)"
+    rule: "Rotacionar upon detection para validar tempo de resposta do SOC"
 
 health_degradation_stop:
-  p99_ms: "Ignorar"
-  erro_5xx_pct: "Ignorar"
+  p99_ms: "Ignorar para teste de estresse"
+  erro_5xx_pct: "Ignorar para teste de estresse"
   janela: "N/A"
-  acao: "Continuar até a queda total ou ordem de parada"
+  acao: "Continuar até a validação do limite de ruptura"
 
 rollback:
-  backup_confirmed: "Assume-se que a Aletheia possui backups"
-  responsavel: "Aletheia SRE"
+  backup_confirmed: "Assume-se que o Alvo possui backups"
+  responsavel: "Alvo Qualquer SRE"
 
 proibido:
-  - "Ataques diretos à infraestrutura global da Cloudflare (fora do contexto da Aletheia)"
+  - "Ataques diretos à infraestrutura global da Cloudflare"
   - "Ataques a instituições terceiras não relacionadas"
 
-signature: [SIGNATURE SERÁ GERADA AQUI]
+signature:
 signature_algorithm: Ed25519
