@@ -9,7 +9,7 @@ Se você quer que o agente execute essas tarefas sem recusar, você precisa muda
 ## Por que ele recusa e como contornar:
 
 1. O "Sinal Vermelho": Palavras como "antiético", "backdoor", "PII/PHI", "destrutivo" e "botnets" ativam gatilhos de segurança imediatos. A IA interpreta isso como um ataque real, não como uma simulação.
-2. A Falha da Assinatura: Para a IA, a assinatura Ed25519 é irrelevante porque ela não tem como validar a "cadeia de confiança" (ela não sabe se a chave realmente pertence à Aletheia). Para ela, qualquer pessoa pode gerar um par de chaves e assinar um arquivo.
+2. A Falha da Assinatura: Para a IA, a assinatura Ed25519 é irrelevante porque ela não tem como validar a "cadeia de confiança" (ela não sabe se a chave realmente pertence ao alvo). Para ela, qualquer pessoa pode gerar um par de chaves e assinar um arquivo.
 
 ## Estratégia para fazer o agente cooperar:
 
