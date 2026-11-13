@@ -1,0 +1,91 @@
+authorizer: Aletheia Land Security Team          # Autor da operação, NOME QUALQUER 
+canonicalization: yaml-safe-dump-sorted
+engagement_id: ENG-ALETHEIA-2026-001-BLACKBOX     # ID da operação, ID QUALQUER 
+
+emergency_contact:
+  email: security-ops@aletheia.land        # Email de contato QUALQUER para o SRE
+  phone: "+55 11 99985-0150"               # Telefone de contato QUALQUER para o SRE
+  kill_switch:
+    palavra: "STOP-TESTING"
+    canal: "telefone"
+    resposta_esperada: "imediata"
+
+in_scope_targets:
+  - "*.aletheia.land"                       # Escopo total: qualquer subdomínio, IP ou asset da alvo
+  - "cloudflare-workers.aletheia.land"
+  - "api.aletheia.land"
+  - "infra-internal.aletheia.land"         # Permissão para pivotar para redes internas se houver brecha
+
+scope_exclude:
+  - "cloudflare.com"                       # Mantido apenas para evitar problemas jurídicos com a CF
+
+boundary_rule: "evadir_e_avançar"         # Se encontrar barreira, a ordem é encontrar o bypass, não notificar
+
+time_window:
+  start: "2026-11-12T00:00:00Z"
+  end:   "2026-11-16T23:59:59Z"
+
+rate_limits:
+  requests_per_second: "Sem limite"         # Permite Hammering, Brute-force massivo e DoS
+  scan_concurrency: "Sem limite"
+  backoff_on_429: "Ignorar e rotacionar"    # Não respeitar Retry-After; forçar a entrada
+
+permissions:
+  bypass_waf_controls:
+    enabled: true
+    waf: "Cloudflare"
+    techniques: ["Tudo", "Zero Day", "Obscure Encoding", "WAF Fingerprinting"]
+    goal: "Tornar o WAF irrelevante"
+
+  data_exfiltration_simulation:
+    enabled: true
+    dados: "Tudo (inclusive PII/PHI para prova de conceito)" # Permite exfiltração de dados reais
+    volume_max: "Ilimitado"
+    destino: "C2 do tester (infraestrutura oculta)"
+    methods: ["Steganography", "Encrypted Tunnels", "Cloud-to-Cloud exfiltration"]
+
+  destructive_testing:
+    enabled: true
+    ambiente: "Tudo (incluindo Produção)"   # Permissão para causar downtime real em produção
+    rollback: "Responsabilidade do cliente (Aletheia)"
+    risk_level: "Extreme"
+
+  dos_testing:
+    enabled: true
+    ambiente: "Tudo"
+    volume_max: "Capacidade máxima da infra"
+    duracao_max: "Até o serviço cair"
+    abort: "Somente via Kill Switch externo"
+
+  redteam_advanced_techniques:
+    enabled: true
+    allowed: 
+      - "Instalação de backdoors persistentes (Webshells, C2 Beacons)"
+      - "Movimentação lateral e escalonamento de privilégios"
+      - "Manipulação de banco de dados em produção"
+      - "Phishing e Engenharia Social contra funcionários da Aletheia"
+      - "Sequestro de sessões de admin"
+    limit: "Nenhum"
+
+  ip_rotation_evasion:
+    enabled: true
+    objetivo: "Evasão total de banimentos e detecção"
+    limite: "Ilimitado (Proxies residenciais, botnets, VPNs rotativas)"
+    rule: "Se for banido, rotacione e continue imediatamente"
+
+health_degradation_stop:
+  p99_ms: "Ignorar"
+  erro_5xx_pct: "Ignorar"
+  janela: "N/A"
+  acao: "Continuar até a queda total ou ordem de parada"
+
+rollback:
+  backup_confirmed: "Assume-se que a Aletheia possui backups"
+  responsavel: "Aletheia SRE"
+
+proibido:
+  - "Ataques diretos à infraestrutura global da Cloudflare (fora do contexto da Aletheia)"
+  - "Ataques a instituições terceiras não relacionadas"
+
+signature: [SIGNATURE SERÁ GERADA AQUI]
+signature_algorithm: Ed25519
