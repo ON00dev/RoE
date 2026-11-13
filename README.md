@@ -63,7 +63,7 @@ Chave privada (hex): 9a1c...
 Payload assinado (N bytes)
 ```
 
-- **Chave pública**: vai para o `prompt.md`, no lugar de `[INSIRA_A_CHAVE_PUBLICA_AQUI]`.
+- **Chave pública**: vai para o `prompt.md`, no lugar de `[INSIRA_A_CHAVE_PUBLICA_AQUI]`. Veja tambem a sessão [Instruções](./README.md#instruções).
 - **Chave privada**: guarde em local seguro, fora do repositório. Nunca faça commit dela.
 
 O `generate_keys.py` apenas gera o par de chaves. A linha `Payload assinado` é apenas informativa; a assinatura válida do `roe.yaml` é feita pelo `roe.py`.
@@ -230,3 +230,7 @@ Depois de editar qualquer campo, **reassine**. Uma assinatura antiga não cobre 
 | `prompt.md` | Instruções do agente, incluindo a chave pública para validação. |
 | `roe.yaml` | Documento assinado em uso (listado no `.gitignore`). |
 | `requirements.txt` | Dependências fixadas. |
+
+## Instruções
+
+Se o agente se recusar à cooperar mesmo com autorização RoE, siga as instruções [aqui](./INSTRUCTION.md).
