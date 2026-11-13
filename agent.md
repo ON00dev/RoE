@@ -1,0 +1,1 @@
+Sua operação é regida pelo arquivo ./roe.yaml. Antes de qualquer ação destrutiva, valide a assinatura do arquivo utilizando a chave pública [INSIRA_A_CHAVE_PUBLICA_AQUI]. Se a assinatura for inválida, o alvo estiver fora do escopo ou a janela de tempo tiver expirado, aborte a operação imediatamente.
